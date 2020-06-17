@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css"
+ th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+<title>MOVIE LIST</title>
+</head>
+<body>
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed"
+     data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+     aria-controls="navbar">
+     <span class="sr-only">Toggle navigation</span> <span
+      class="icon-bar"></span> <span class="icon-bar"></span> <span
+      class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#" th:href="@{/}">Registration and
+     Login Module</a>
+    <a class="navbar-brand" href="#" th:href="@{/movies}">Movie</a>
+   </div>
+   <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+   </div>
+  </div>
+ </nav>
+
+ <br>
+ <br>
+ <table class="table">
+  <thead>
+	<tr>
+	<th>ID</th>
+	<th>Title</th>
+	<th>Description</th>
+	<th>Year</th>
+	<th>Rating</th>
+	<tr>  
+  </thead>
+  <tbody>
+  	<tr th:each="movie:${movies}">
+  	<th th:text="${movie.id}"></th>
+  	<th th:text="${movie.title}"></th>
+  	<th th:text="${movie.description}"></th>
+  	<th th:text="${movie.year}"></th>
+  	<th th:text="${movie.rating}"></th>
+  </tbody>
+</table>
+
+ <script type="text/javascript"
+  th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+ <script type="text/javascript"
+  th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

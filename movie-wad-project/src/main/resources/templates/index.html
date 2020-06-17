@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+  <style>
+
+  </style>
+  <title>
+    Web film project
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <link rel="stylesheet" th:href="@{/style_sample.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid ">
+    <div class="header header-box" style="background-color: #06121e;">
+      <img th:src="@{/image/logone.png}" id="logo">
+
+      <a class="nav-link dropdown-toggle headerbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i th:text="${#authentication.getPrincipal().getUsername()}"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Gallery</a>
+        <a class="dropdown-item" href="#">Favourites</a>
+        <a class="dropdown-item" href="#" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log out</a>
+      </div>
+
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light " style= "background-color: #091c2d;">
+      <a style="color:white" class="navbar-brand" href="#about">ABOUT US</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a style="color:white" class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a style="color:white" class="nav-link" href="../html/contact.html">Contact</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a style="color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Genre
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+              		<a class="dropdown-item" th:each="genre:${genres}" th:text="${genre.genrename}"></a> 
+				
+            </div>
+          </li>
+
+        </ul>
+        
+          <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+					<input class="form-control mr-sm-2" id="txtSearch" type="text" name="keyword"
+						placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <section class="section">
+      <div class="container series">
+                  <div class="row mb-4 mt-2">
+          <div class="col-md-3 nopadding" th:each="movie:${movies}">
+            <div class="offset-md-1 col-md-10"> <a th:href="@{/movie}"><img class="img-fluid" th:src="@{${'/image/poster/'+ movie.image}}" title="poster"></a></div>
+            <h3 class="name en"> <a th:href="@{/movie}" th:text="${movie.title}"></a></h3>
+          </div>
+          </div>
+       
+      </div>
+
+  </section>
+
+  <footer id="about" class="about">
+    <div class="container">
+      <h3 class="title is-6">
+        What is the difference between high quality PHIMHAYPROVIP movies?
+      </h3>
+      <ul class="has-text-grey-light">
+        <li>The film is bluray (reencoded), the lowest resolution is Full HD (1080p), while most movie pages other only have HD resolution (720p) is the highest</li>
+        <li>High quality, the data per second (bitrate) from 5-10 times the normal online movie - this is the decisive factor of the film's definition (even more important than the resolution)</li>
+        <li>5.1 (6 channel) audio instead of stereo (2 channel) like other movie sites (including Youtube)</li>
+        <li>Suitable for viewing on high-resolution TVs, computers, laptops</li>
+        <li>If you are not satisfied with the available subtitles, you can upload your own subtitles to watch online</li>       
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

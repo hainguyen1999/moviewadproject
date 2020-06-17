@@ -1,0 +1,36 @@
+body {
+    background-color: #06121e;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+
+.header{
+    width: auto;
+    height: auto;
+}
+
+ #logo {
+    height: 60px;
+    width: 225px;
+    border-radius: 5px;
+  }
+
+.nopadding {
+    padding: 0 !important;
+    margin-bottom: 20px;
+}
+
+.nav-link.dropdown-toggle.headerbtn {
+    text-decoration: none;
+    border-radius: 30px;
+    padding: 7px 20px;
+    float:right;
+    margin-top: 11px;
+    color: #fff !important;
+    background: #107afd;
+    font-weight: 600;  
+}
